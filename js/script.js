@@ -29,6 +29,8 @@ const salvarGasto = document.getElementById("salvarGasto");
 const descricaoGasto = document.getElementById("descricaoGasto");
 const valorGasto = document.getElementById("valorGasto");
 
+// Para tabela
+const tabelaGastos = document.getElementById("tabelaGastos");
 
 // Logica do Modal aqui Docinho
 function abrirModal() {
@@ -65,6 +67,7 @@ function criarTab(nome) {
 
   // insere antes do botão "+"
   tabsContainer.insertBefore(novaTab, btnMais);
+  
 }
 
 btnConcluir.addEventListener("click", () => {
@@ -107,6 +110,7 @@ function ativarTab(nome, elemento) {
   
   console.log("Categoria ativa:", categoriaAtiva);
   atualizarTela();
+  renderizarTabela();
 }
 
 // Logica ta tab Geral
@@ -171,4 +175,29 @@ salvarGasto.addEventListener("click", () => {
   valorGasto.value = "";
 
   modalGasto.style.display = "none";
+  renderizarTabela();
 });
+
+// Aqui renderiza a tabela dentro do tab especifico
+
+function renderizarTabela() {
+
+  tabelaGastos.innerHTML = "";
+
+  const categoria = categorias.find(c => c.nome === categoriaAtiva);
+
+  if (!categoria) return;
+
+  categoria.gastos.forEach(gasto => {
+
+    const linha = document.createElement("tr");
+
+    linha.innerHTML = `
+      <td>Gasto</td>
+      <td>${gasto.descricao}</td>
+      <td>R$ ${gasto.valor}</td>
+    `;
+
+    tabelaGastos.appendChild(linha);
+  });
+}
