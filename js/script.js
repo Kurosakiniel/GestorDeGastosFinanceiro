@@ -7,7 +7,7 @@ const btnAddGasto = document.getElementById("btnAddGasto");
 
 // Para o tabs
 
-let gastos = [];
+let categorias = [];
 let categoriaAtiva = "Geral";
 
 const tabGeral = document.getElementById("tabGeral");
@@ -19,6 +19,16 @@ const tabsContainer = document.querySelector(".tabs");
 
 const conteudoVazio = document.querySelector(".conteudo-vazio");
 const conteudoCategoria = document.getElementById("conteudoCategoria");
+
+// Modal dentro da tab ai
+const modalGasto = document.getElementById("modalGasto");
+const btnAddDentro = document.getElementById("btnAddDentro");
+const cancelarGasto = document.getElementById("cancelarGasto");
+const salvarGasto = document.getElementById("salvarGasto");
+
+const descricaoGasto = document.getElementById("descricaoGasto");
+const valorGasto = document.getElementById("valorGasto");
+
 
 // Logica do Modal aqui Docinho
 function abrirModal() {
@@ -66,7 +76,10 @@ btnConcluir.addEventListener("click", () => {
   }
 
   // salva no array
-  gastos.push(nome);
+  categorias.push({
+    nome: nome,
+    gastos: []
+  });
 
   // cria na tela
   criarTab(nome);
@@ -118,3 +131,44 @@ function atualizarTela() {
   
   console.log(conteudoCategoria);
 }
+
+// Modal da tab especifica
+
+// abrir
+btnAddDentro.addEventListener("click", () => {
+  modalGasto.style.display = "flex";
+});
+
+// fechar
+cancelarGasto.addEventListener("click", () => {
+  modalGasto.style.display = "none";
+});
+
+// Aqui é pra salvar o gasto na categoria especifica, Jr
+salvarGasto.addEventListener("click", () => {
+  const descricao = descricaoGasto.value.trim();
+  const valor = parseFloat(valorGasto.value);
+
+  if (descricao === "" || isNaN(valor)) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  // encontra categoria ativa
+  const categoria = categorias.find(c => c.nome === categoriaAtiva);
+
+  if (categoria) {
+    categoria.gastos.push({
+      descricao: descricao,
+      valor: valor
+    });
+  }
+
+  console.log(categorias);
+
+  // limpar
+  descricaoGasto.value = "";
+  valorGasto.value = "";
+
+  modalGasto.style.display = "none";
+});

@@ -52,7 +52,7 @@
         <button class="btn btn-danger">Excluir</button>
 
         <!-- botão adicionar gasto -->
-        <button class="btn btn-dark">+</button>
+        <button id="btnAddDentro" class="btn btn-dark">+</button>
 
       </div>
 
@@ -71,6 +71,22 @@
         </div>
     </div>
 
+    <!-- Modal de criar gasto dentro de uma tab nova -->
+    <div id="modalGasto" class="modal-custom">
+
+      <div class="modal-box">
+        <h5>Novo gasto</h5>
+
+        <input type="text" id="descricaoGasto" placeholder="Descrição">
+        <input type="number" id="valorGasto" placeholder="Valor">
+
+        <div class="modal-actions">
+          <button id="cancelarGasto" class="btn btn-cancelar">Cancelar</button>
+          <button id="salvarGasto" class="btn btn-concluir">Salvar</button>
+        </div>
+    </div>
+
+</div>
 
     <script src="js/script.js"></script>
 </body>
