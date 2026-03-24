@@ -46,6 +46,15 @@ body {
   transition: 0.2s;
 }
 
+/* Botão pra selecionar o ativo */
+.tab-btn.active {
+  background-color: #4f4f4f;
+  border-bottom: 3px solid white;
+}
+.modal-box input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+}
 /* HOVER DO BOTÃO DE CONFIGURAÇÃO */
 .config-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -112,10 +121,6 @@ body {
   transition: 0.2s;
 }
 
-.modal-box input:focus {
-  border-color: #28a745;
-  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
-}
 
 /* ALINHAR O NOME NO CENTRO DA CAIXINHA DO MODAL */
 .modal-box h5 {
