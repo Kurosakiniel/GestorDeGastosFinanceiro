@@ -215,7 +215,16 @@ body {
   font-size: 18px;
 }
 
+/* Conteiner pro grafico */
 .grafico-container {
   max-width: 600px;
   margin: 0 auto; /* centraliza */
+}
+
+/* Css dos cardizinhos ao final de cada tab */
+.card {
+  border-radius: 10px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }

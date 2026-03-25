@@ -32,6 +32,9 @@ const valorGasto = document.getElementById("valorGasto");
 // Para tabela
 const tabelaGastos = document.getElementById("tabelaGastos");
 
+// Para os Cardzin
+const cardsPorcentagem = document.getElementById("cardsPorcentagem");
+
 // Grafico aqui oh
 let grafico = null;
 
@@ -115,6 +118,7 @@ function ativarTab(nome, elemento) {
   atualizarTela();
   renderizarTabela();
   renderizarGrafico();
+  renderizarCards();
 }
 
 // Logica ta tab Geral
@@ -181,6 +185,7 @@ salvarGasto.addEventListener("click", () => {
   modalGasto.style.display = "none";
   renderizarTabela();
   renderizarGrafico();
+  renderizarCards();
 });
 
 // Aqui renderiza a tabela dentro do tab especifico
@@ -242,4 +247,37 @@ function renderizarGrafico() {
     }
   });
 
+}
+
+// fUNÇÃO DOS CARDS
+
+function renderizarCards() {
+
+  cardsPorcentagem.innerHTML = "";
+
+  const categoria = categorias.find(c => c.nome === categoriaAtiva);
+
+  if (!categoria || categoria.gastos.length === 0) return;
+
+  // soma total
+  const total = categoria.gastos.reduce((acc, g) => acc + g.valor, 0);
+
+  categoria.gastos.forEach(gasto => {
+
+    const porcentagem = ((gasto.valor / total) * 100).toFixed(1);
+
+    const card = document.createElement("div");
+
+    card.classList.add("card", "p-3");
+
+    card.style.width = "150px";
+
+    card.innerHTML = `
+      <h6>${gasto.descricao}</h6>
+      <p>${porcentagem}%</p>
+    `;
+
+    cardsPorcentagem.appendChild(card);
+
+  });
 }
