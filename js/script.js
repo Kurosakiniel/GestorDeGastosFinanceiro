@@ -133,18 +133,34 @@ tabGeral.addEventListener("click", () => {
 // aqui atualiza as telas das tabs
 
 function atualizarTela() {
-  
+
   if (categoriaAtiva === "Geral") {
-    // mostra tela vazia
-    conteudoVazio.classList.remove("d-none");
-    conteudoCategoria.classList.add("d-none");
+
+    if (!temGastosNoGeral()) {
+      // tela vazia
+      conteudoVazio.classList.remove("d-none");
+      conteudoCategoria.classList.add("d-none");
+    } else {
+      // mostra dashboard
+      conteudoVazio.classList.add("d-none");
+      conteudoCategoria.classList.remove("d-none");
+
+      // 🔥 ESCONDE O QUE NÃO QUER
+      tabelaContainer.classList.add("d-none");
+      btnExcluirCategoria.classList.add("d-none");
+      btnAddDentro.classList.add("d-none");
+    }
+
   } else {
-    // mostra tela da categoria
+    // categorias normais
     conteudoVazio.classList.add("d-none");
     conteudoCategoria.classList.remove("d-none");
+
+    // 🔥 MOSTRA DE VOLTA
+    tabelaContainer.classList.remove("d-none");
+    btnExcluirCategoria.classList.remove("d-none");
+    btnAddDentro.classList.remove("d-none");
   }
-  
-  console.log(conteudoCategoria);
 }
 
 // Modal da tab especifica
@@ -204,7 +220,7 @@ function renderizarTabela() {
   categoria.gastos.forEach((gasto, index) => {
 
     const linha = document.createElement("tr");
-
+    
     linha.innerHTML = `
       <td>Gasto</td>
       <td>${gasto.descricao}</td>
@@ -214,6 +230,7 @@ function renderizarTabela() {
       </td>
     `;
 
+    // 🔥 AQUI TÁ O QUE FALTA
     const btnExcluir = linha.querySelector(".btn-excluir");
 
     btnExcluir.addEventListener("click", () => {
@@ -232,35 +249,58 @@ function renderizarTabela() {
 
 function renderizarGrafico() {
 
-  // 🔥 destrói sempre primeiro
   if (grafico) {
     grafico.destroy();
     grafico = null;
   }
 
+  const ctx = document.getElementById("graficoGastos");
+
+  // 🔥 CASO GERAL
+  if (categoriaAtiva === "Geral") {
+
+    if (!temGastosNoGeral()) return;
+
+    const labels = categorias.map(c => c.nome);
+
+    const valores = categorias.map(c =>
+      c.gastos.reduce((acc, g) => acc + g.valor, 0)
+    );
+
+    grafico = new Chart(ctx, {
+      type: "pie", // 👈 aqui é pizza
+      data: {
+        labels: labels,
+        datasets: [{
+          data: valores,
+          backgroundColor: [
+            "#ff6384",
+            "#36a2eb",
+            "#ffce56",
+            "#4bc0c0",
+            "#9966ff"
+          ]
+        }]
+      }
+    });
+
+    return;
+  }
+
+  // 🔥 RESTO (já existente)
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
 
-  // se não tiver dados, para aqui (sem gráfico)
   if (!categoria || categoria.gastos.length === 0) return;
 
   const labels = categoria.gastos.map(g => g.descricao);
   const valores = categoria.gastos.map(g => g.valor);
-
-  const ctx = document.getElementById("graficoGastos");
 
   grafico = new Chart(ctx, {
     type: "bar",
     data: {
       labels: labels,
       datasets: [{
-        data: valores,
-        backgroundColor: [
-          "#ff6384",
-          "#36a2eb",
-          "#ffce56",
-          "#4bc0c0",
-          "#9966ff"
-        ]
+        data: valores
       }]
     }
   });
@@ -333,3 +373,8 @@ btnExcluirCategoria.addEventListener("click", () => {
   renderizarCards();
 
 });
+
+// Verificar se tem dados de gastos ( pra deixar o geral bonitinho)
+function temGastosNoGeral() {
+  return categorias.some(c => c.gastos.length > 0);
+}
