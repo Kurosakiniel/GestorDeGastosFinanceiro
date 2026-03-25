@@ -185,7 +185,7 @@ salvarGasto.addEventListener("click", () => {
   modalGasto.style.display = "none";
   renderizarTabela();
   renderizarGrafico();
-  
+  renderizarCards();
 });
 
 // Aqui renderiza a tabela dentro do tab especifico
@@ -218,46 +218,32 @@ function renderizarGrafico() {
 
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
 
-  const ctx = document.getElementById("graficoGastos");
-
-  // 🔥 sempre destrói o gráfico anterior
-  if (grafico) {
-    grafico.destroy();
-    grafico = null;
-  }
-
-  // 🚨 se não tiver categoria ou gastos
-  if (!categoria || categoria.gastos.length === 0) {
-    return;
-  }
+  if (!categoria || categoria.gastos.length === 0) return;
 
   const labels = categoria.gastos.map(g => g.descricao);
   const valores = categoria.gastos.map(g => g.valor);
+
+  const ctx = document.getElementById("graficoGastos");
+
+  // destrói gráfico antigo
+  if (grafico) {
+    grafico.destroy();
+  }
 
   grafico = new Chart(ctx, {
     type: "bar",
     data: {
       labels: labels,
       datasets: [{
-        label: "Gastos (R$)",
         data: valores,
-        backgroundColor: "#36a2eb",
-        borderRadius: 8
+        backgroundColor: [
+          "#ff6384",
+          "#36a2eb",
+          "#ffce56",
+          "#4bc0c0",
+          "#9966ff"
+        ]
       }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
     }
   });
 
