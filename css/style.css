@@ -242,3 +242,99 @@ body {
   max-width: 600px;
   margin: 0 auto; /* centraliza */
 }
+
+#btnExcluirCategoria,
+#btnAddDentro {
+  min-width: 120px;      /* mesmo padrão */
+  padding: 8px 20px;     /* mesmo respiro */
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* CABEÇALHO */
+.table thead {
+  background-color: #4f4f4f;
+  color: white;
+}
+
+.table thead th {
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* LINHAS */
+.table tbody tr {
+  transition: 0.2s;
+}
+
+/* EFEITO HOVER */
+.table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* CÉLULAS */
+.table tbody td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+/* ÚLTIMA LINHA SEM BORDA */
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table td:nth-child(3) {
+  font-weight: bold;
+  color: #dc3535; /* Vermelho */
+}
+
+/* CONTAINER */
+#cardsPorcentagem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* CARD (Bootstrap + custom) */
+#cardsPorcentagem .card {
+  width: 150px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* 🔥 HOVER */
+#cardsPorcentagem .card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* TÍTULO */
+#cardsPorcentagem .card h6 {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* PORCENTAGEM */
+#cardsPorcentagem .card p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #a72828;
+  margin-top: 5px;
+}
+
