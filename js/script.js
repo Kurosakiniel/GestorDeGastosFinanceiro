@@ -201,7 +201,7 @@ function renderizarTabela() {
 
   if (!categoria) return;
 
-  categoria.gastos.forEach(gasto => {
+  categoria.gastos.forEach((gasto, index) => {
 
     const linha = document.createElement("tr");
 
@@ -209,7 +209,20 @@ function renderizarTabela() {
       <td>Gasto</td>
       <td>${gasto.descricao}</td>
       <td>R$ ${gasto.valor}</td>
+      <td>
+        <button class="btn btn-danger btn-sm btn-excluir">🗑️</button>
+      </td>
     `;
+
+    const btnExcluir = linha.querySelector(".btn-excluir");
+
+    btnExcluir.addEventListener("click", () => {
+      categoria.gastos.splice(index, 1);
+
+      renderizarTabela();
+      renderizarGrafico();
+      renderizarCards();
+    });
 
     tabelaGastos.appendChild(linha);
   });
