@@ -1,7 +1,7 @@
-// 📊 gráfico global
+// gráfico global 
 let grafico = null;
 
-// 🎯 ATUALIZA A TELA (mostra geral ou categoria)
+// ATUALIZA A TELA (mostra geral ou categoria)
 function atualizarTela() {
 
   const conteudoVazio = document.querySelector(".conteudo-vazio");
@@ -34,19 +34,19 @@ function atualizarTela() {
   }
 }
 
-// 🧠 VERIFICA SE TEM GASTO NO GERAL
+// VERIFICA SE TEM GASTO NO GERAL
 function temGastosNoGeral() {
   return categorias.some(c => c.gastos.length > 0);
 }
 
-// 🔄 CENTRAL DE RENDER
+// Renderizador aqui
 function renderizarTudo() {
   renderizarTabela();
   renderizarGrafico();
   renderizarCards();
 }
 
-// 📋 TABELA
+// Render da TABELA
 function renderizarTabela() {
 
   const tabelaGastos = document.getElementById("tabelaGastos");
@@ -80,7 +80,7 @@ function renderizarTabela() {
   });
 }
 
-// 📊 GRÁFICO
+// Render do GRÁFICO
 function renderizarGrafico() {
 
   if (grafico) {
@@ -90,7 +90,7 @@ function renderizarGrafico() {
 
   const ctx = document.getElementById("graficoGastos");
 
-  // 🟢 GERAL
+  //  GERAL Aqui
   if (categoriaAtiva === "Geral") {
 
     if (!temGastosNoGeral()) return;
@@ -121,7 +121,7 @@ function renderizarGrafico() {
     return;
   }
 
-  // 🔵 CATEGORIA
+  //  CATEGORIA ( A tab )
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
   if (!categoria || categoria.gastos.length === 0) return;
 
@@ -139,13 +139,13 @@ function renderizarGrafico() {
   });
 }
 
-// 🧮 CARDS
+// CARDS ( os bixin que mostra porcentagem especifico )
 function renderizarCards() {
 
   const cardsPorcentagem = document.getElementById("cardsPorcentagem");
   cardsPorcentagem.innerHTML = "";
 
-  // 🟢 GERAL
+  // GERAL
   if (categoriaAtiva === "Geral") {
 
     if (!temGastosNoGeral()) return;
@@ -175,7 +175,7 @@ function renderizarCards() {
     return;
   }
 
-  // 🔵 CATEGORIA
+  // CATEGORIA (Do tabs especifico)
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
   if (!categoria || categoria.gastos.length === 0) return;
 
