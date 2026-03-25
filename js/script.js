@@ -312,11 +312,43 @@ function renderizarCards() {
 
   cardsPorcentagem.innerHTML = "";
 
+  // 🔥 CASO GERAL
+  if (categoriaAtiva === "Geral") {
+
+    if (!temGastosNoGeral()) return;
+
+    // total geral
+    const totalGeral = categorias.reduce((acc, c) => {
+      return acc + c.gastos.reduce((soma, g) => soma + g.valor, 0);
+    }, 0);
+
+    categorias.forEach(categoria => {
+
+      const totalCategoria = categoria.gastos.reduce((acc, g) => acc + g.valor, 0);
+
+      if (totalCategoria === 0) return;
+
+      const porcentagem = ((totalCategoria / totalGeral) * 100).toFixed(1);
+
+      const card = document.createElement("div");
+      card.classList.add("card", "p-3");
+
+      card.innerHTML = `
+        <h6>${categoria.nome}</h6>
+        <p>${porcentagem}%</p>
+      `;
+
+      cardsPorcentagem.appendChild(card);
+    });
+
+    return;
+  }
+
+  // 🔥 CASO NORMAL (o que você já tinha)
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
 
   if (!categoria || categoria.gastos.length === 0) return;
 
-  // soma total
   const total = categoria.gastos.reduce((acc, g) => acc + g.valor, 0);
 
   categoria.gastos.forEach(gasto => {
@@ -324,10 +356,7 @@ function renderizarCards() {
     const porcentagem = ((gasto.valor / total) * 100).toFixed(1);
 
     const card = document.createElement("div");
-
     card.classList.add("card", "p-3");
-
-    card.style.width = "150px";
 
     card.innerHTML = `
       <h6>${gasto.descricao}</h6>
@@ -335,7 +364,6 @@ function renderizarCards() {
     `;
 
     cardsPorcentagem.appendChild(card);
-
   });
 }
 
