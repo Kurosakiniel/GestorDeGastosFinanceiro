@@ -145,7 +145,7 @@ function atualizarTela() {
       conteudoVazio.classList.add("d-none");
       conteudoCategoria.classList.remove("d-none");
 
-      // 🔥 ESCONDE O QUE NÃO QUER
+      // ESCONDE O QUE NÃO QUER
       tabelaContainer.classList.add("d-none");
       btnExcluirCategoria.classList.add("d-none");
       btnAddDentro.classList.add("d-none");
@@ -156,7 +156,7 @@ function atualizarTela() {
     conteudoVazio.classList.add("d-none");
     conteudoCategoria.classList.remove("d-none");
 
-    // 🔥 MOSTRA DE VOLTA
+    // MOSTRA DE VOLTA
     tabelaContainer.classList.remove("d-none");
     btnExcluirCategoria.classList.remove("d-none");
     btnAddDentro.classList.remove("d-none");
@@ -230,7 +230,7 @@ function renderizarTabela() {
       </td>
     `;
 
-    // 🔥 AQUI TÁ O QUE FALTA
+    // AQUI TÁ O QUE FALTA
     const btnExcluir = linha.querySelector(".btn-excluir");
 
     btnExcluir.addEventListener("click", () => {
@@ -256,7 +256,7 @@ function renderizarGrafico() {
 
   const ctx = document.getElementById("graficoGastos");
 
-  // 🔥 CASO GERAL
+  // CASO GERAL
   if (categoriaAtiva === "Geral") {
 
     if (!temGastosNoGeral()) return;
@@ -273,7 +273,7 @@ function renderizarGrafico() {
         labels: labels,
         datasets: [{
           data: valores,
-          backgroundColor: [
+          backgroundColor: [ // 👈 ESSAS CORES BUGARAM NO GRÁFICO QUE FICA ABAIXO DA TABELA, AGORA É TUDO AZUL !!
             "#ff6384",
             "#36a2eb",
             "#ffce56",
@@ -287,7 +287,7 @@ function renderizarGrafico() {
     return;
   }
 
-  // 🔥 RESTO (já existente)
+  // RESTO (já existente)
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
 
   if (!categoria || categoria.gastos.length === 0) return;

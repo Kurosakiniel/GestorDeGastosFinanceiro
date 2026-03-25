@@ -37,7 +37,7 @@ body {
 .config-btn {
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* agora fica redondo */
+  border-radius: 50%;
   border: none;
   background-color: transparent;
   color: var(--cor-texto-branco);
@@ -47,7 +47,7 @@ body {
   transition: 0.2s;
 }
 
-/* HOVER DO BOTÃO DE CONFIGURAÇÃO */
+/* EFEITO HOVER DO BOTÃO DE CONFIGURAÇÃO */
 .config-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -58,7 +58,7 @@ body {
   height: 45px;
   border-radius: 50%;
   padding: 0;
-  overflow: hidden; /* corta a imagem no formato circular */
+  overflow: hidden;
   border: none;
   background: none;
   cursor: pointer;
@@ -69,7 +69,7 @@ body {
 .perfil-btn img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* evita distorção */
+  object-fit: cover;
 }
 
 /* TABS */
@@ -77,21 +77,25 @@ body {
   align-items: center;
   display: flex;
   gap: 10px;
-  overflow-x: auto;   /* 🔥 scroll horizontal */
-  white-space: nowrap; /* impede quebra de linha */
-  max-width: 100%;     /* impede crescer além da tela */
-  padding-bottom: 10px;  /* espaço pro scroll */
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;  
+  padding-bottom: 10px; 
+  padding-top: 10px;
 }
 
+/* SCROLLBAR */
 .tabs::-webkit-scrollbar {
   height: 8px;
 }
 
+/* SCROLLBAR */
 .tabs::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
+/* BOTÕES "TABS" */
 .tab-btn {
   background-color: var(--cor-tab);
   border: none;
@@ -105,14 +109,28 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 0 0 auto; /* 🔥 NÃO deixa o botão esticar ou encolher */
+  flex: 0 0 auto;
+  transition: all 0.25s ease;
 }
 
+/* EFEITO HOVER */
+.tab-btn:hover {
+  background-color: #0d6efd;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+/* EFEITO QUANDO BOTÃO TIVER SELECIONADO */
 .tab-btn.active {
   background-color: var(--cor-tab-ativa);
+  transform: scale(1.05);
 }
 
-/* Modal */
+/* EFEITO AO CLICAR */
+.tab-btn:active {
+  transform: scale(0.98);
+}
+
+/* MODAL */
 .modal-custom {
   position: fixed;
   top: 0;
@@ -176,7 +194,7 @@ body {
   color: white;
 }
 
-/* HOVER DO BOTÃO DE CANCELAR */
+/* EFEITO HOVER DO BOTÃO DE CANCELAR */
 .btn-cancelar:hover {
   background-color: #b02a37;
 }
@@ -187,13 +205,13 @@ body {
   color: white;
 }
 
-/* HOVER DO BOTÃO DE CONCLUIR */
+/* EFEITO HOVER DO BOTÃO DE CONCLUIR */
 .btn-concluir:hover {
   background-color: #1e7e34;
 }
 
 
-/* CONTEÚDO VAZIO */
+/* TEXTO CONTEÚDO VAZIO */
 .conteudo-vazio {
   height: calc(100vh - 140px);
 }
@@ -213,7 +231,7 @@ body {
   transition: all 0.25s ease;
 }
 
-/* HOVER DO + NO CETRO DA TELA */
+/* EFEITO HOVER DO + NO CETRO DA TELA */
 .box-add:hover {
   transform: translateY(-8px) scale(1.08);
   border-color: #007bff;
@@ -227,7 +245,7 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* HOVER DO ÍCONE DE GIRAR NO QUADRADO DO + */
+/* EFEITO HOVER DO ÍCONE DE GIRAR NO QUADRADO DO + */
 .box-add:hover .plus-icon {
   transform: rotate(90deg);
 }
@@ -248,8 +266,17 @@ body {
   min-width: 120px;      /* mesmo padrão */
   padding: 8px 20px;     /* mesmo respiro */
   text-align: center;
+  transition: all 0.25s ease;
 }
 
+/* EFEITO HOVER */
+#btnExcluirCategoria:hover {
+  background-color: #b02a37; /* vermelho mais escuro */
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* A TABELA COMEÇA AQUI DANIMEL*/
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -281,7 +308,7 @@ body {
   background-color: #f5f5f5;
 }
 
-/* CÉLULAS */
+/* CÉLULAS DA TABELA */
 .table tbody td {
   padding: 12px;
   text-align: center;
@@ -289,17 +316,17 @@ body {
   border-right: 1px solid #ddd;
 }
 
-/* ÚLTIMA LINHA SEM BORDA */
+/* ÚLTIMA LINHA DA TABELA SEM A BORDA */
 .table tbody tr:last-child td {
   border-bottom: none;
 }
 
 .table td:nth-child(3) {
   font-weight: bold;
-  color: #dc3535; /* Vermelho */
+  color: #dc3535;
 }
 
-/* CONTAINER */
+/* CONTAINER QUE ESTÃO OS CARDS */
 #cardsPorcentagem {
   display: flex;
   flex-wrap: wrap;
@@ -317,20 +344,20 @@ body {
   text-align: center;
 }
 
-/* 🔥 HOVER */
+/* EFEITO HOVER */
 #cardsPorcentagem .card:hover {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
-/* TÍTULO */
+/* TÍTULO DO CARD */
 #cardsPorcentagem .card h6 {
   margin: 0;
   font-size: 14px;
   color: #666;
 }
 
-/* PORCENTAGEM */
+/* PORCENTAGEM DOS CARDS */
 #cardsPorcentagem .card p {
   font-size: 18px;
   font-weight: bold;
