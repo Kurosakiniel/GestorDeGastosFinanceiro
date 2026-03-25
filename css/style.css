@@ -21,6 +21,7 @@ body {
   background-color: var(--cor-fundo);
   margin: 0;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 /* HEADER */
@@ -74,6 +75,35 @@ body {
 /* TABS */
 .tabs {
   align-items: center;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;   /* 🔥 scroll horizontal */
+  white-space: nowrap; /* impede quebra de linha */
+  max-width: 100%;     /* impede crescer além da tela */
+  padding-bottom: 10px;  /* espaço pro scroll */
+}
+
+.tabs::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabs::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.tab-btn {
+  background-color: var(--cor-tab);
+  border: none;
+  padding: 8px 20px;
+  color: var(--cor-texto-branco);
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 0 0 auto; /* 🔥 NÃO deixa o botão esticar ou encolher */
+}
+
+.tab-btn.active {
+  background-color: var(--cor-tab-ativa);
 }
 
 /* Modal */
@@ -88,7 +118,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 
 /* CAIXINHA DO MODAL*/
 .modal-box {
@@ -157,18 +186,6 @@ body {
   background-color: #1e7e34;
 }
 
-.tab-btn {
-  background-color: var(--cor-tab);
-  border: none;
-  padding: 8px 20px;
-  color: var(--cor-texto-branco);
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.tab-btn.active {
-  background-color: var(--cor-tab-ativa);
-}
 
 /* CONTEÚDO VAZIO */
 .conteudo-vazio {
