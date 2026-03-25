@@ -32,6 +32,9 @@ const valorGasto = document.getElementById("valorGasto");
 // Para tabela
 const tabelaGastos = document.getElementById("tabelaGastos");
 
+// Grafico aqui oh
+let grafico = null;
+
 // Logica do Modal aqui Docinho
 function abrirModal() {
   modal.style.display = "flex";
@@ -111,6 +114,7 @@ function ativarTab(nome, elemento) {
   console.log("Categoria ativa:", categoriaAtiva);
   atualizarTela();
   renderizarTabela();
+  renderizarGrafico();
 }
 
 // Logica ta tab Geral
@@ -176,6 +180,7 @@ salvarGasto.addEventListener("click", () => {
 
   modalGasto.style.display = "none";
   renderizarTabela();
+  renderizarGrafico();
 });
 
 // Aqui renderiza a tabela dentro do tab especifico
@@ -200,4 +205,41 @@ function renderizarTabela() {
 
     tabelaGastos.appendChild(linha);
   });
+}
+
+// Função para renderizar o grafico
+
+function renderizarGrafico() {
+
+  const categoria = categorias.find(c => c.nome === categoriaAtiva);
+
+  if (!categoria || categoria.gastos.length === 0) return;
+
+  const labels = categoria.gastos.map(g => g.descricao);
+  const valores = categoria.gastos.map(g => g.valor);
+
+  const ctx = document.getElementById("graficoGastos");
+
+  // destrói gráfico antigo
+  if (grafico) {
+    grafico.destroy();
+  }
+
+  grafico = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: valores,
+        backgroundColor: [
+          "#ff6384",
+          "#36a2eb",
+          "#ffce56",
+          "#4bc0c0",
+          "#9966ff"
+        ]
+      }]
+    }
+  });
+
 }
