@@ -41,6 +41,19 @@ const btnExcluirCategoria = document.getElementById("btnExcluirCategoria");
 // Grafico aqui oh
 let grafico = null;
 
+// Função pra carregar os dados
+function carregarDados() {
+  const dados = localStorage.getItem("categorias");
+
+  if (dados) {
+    categorias = JSON.parse(dados);
+
+    categorias.forEach(c => {
+      criarTab(c.nome);
+    });
+  }
+}
+
 // Logica do Modal aqui Docinho
 function abrirModal() {
   modal.style.display = "flex";
@@ -92,6 +105,7 @@ btnConcluir.addEventListener("click", () => {
     nome: nome,
     gastos: []
   });
+  salvarDados();
 
   // cria na tela
   criarTab(nome);
@@ -194,7 +208,7 @@ salvarGasto.addEventListener("click", () => {
       valor: valor
     });
   }
-
+  salvarDados();
   console.log(categorias);
 
   // limpar
@@ -239,6 +253,7 @@ function renderizarTabela() {
       renderizarTabela();
       renderizarGrafico();
       renderizarCards();
+      salvarDados();
     });
 
     tabelaGastos.appendChild(linha);
@@ -376,32 +391,40 @@ btnExcluirCategoria.addEventListener("click", () => {
 
   // remove do array
   categorias = categorias.filter(c => c.nome !== categoriaAtiva);
-
   // remove a tab da tela
   const tabs = document.querySelectorAll(".tab-btn");
-
+  
   tabs.forEach(tab => {
     if (tab.textContent === categoriaAtiva) {
       tab.remove();
     }
   });
-
+  
   // volta pra Geral
   categoriaAtiva = "Geral";
-
+  
   // ativa visualmente
   document.querySelectorAll(".tab-btn").forEach(tab => tab.classList.remove("active"));
   tabGeral.classList.add("active");
-
+  
   // atualiza tela
   atualizarTela();
   renderizarTabela();
   renderizarGrafico();
   renderizarCards();
-
+  salvarDados();
+  
 });
 
 // Verificar se tem dados de gastos ( pra deixar o geral bonitinho)
 function temGastosNoGeral() {
   return categorias.some(c => c.gastos.length > 0);
 }
+
+// Isso aqui vai salvar os dados viu
+
+function salvarDados() {
+  localStorage.setItem("categorias", JSON.stringify(categorias));
+}
+
+carregarDados();
