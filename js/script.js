@@ -35,6 +35,9 @@ const tabelaGastos = document.getElementById("tabelaGastos");
 // Para os Cardzin
 const cardsPorcentagem = document.getElementById("cardsPorcentagem");
 
+// Excluir Categoria
+const btnExcluirCategoria = document.getElementById("btnExcluirCategoria");
+
 // Grafico aqui oh
 let grafico = null;
 
@@ -216,19 +219,21 @@ function renderizarTabela() {
 
 function renderizarGrafico() {
 
+  // 🔥 destrói sempre primeiro
+  if (grafico) {
+    grafico.destroy();
+    grafico = null;
+  }
+
   const categoria = categorias.find(c => c.nome === categoriaAtiva);
 
+  // se não tiver dados, para aqui (sem gráfico)
   if (!categoria || categoria.gastos.length === 0) return;
 
   const labels = categoria.gastos.map(g => g.descricao);
   const valores = categoria.gastos.map(g => g.valor);
 
   const ctx = document.getElementById("graficoGastos");
-
-  // destrói gráfico antigo
-  if (grafico) {
-    grafico.destroy();
-  }
 
   grafico = new Chart(ctx, {
     type: "bar",
@@ -246,7 +251,6 @@ function renderizarGrafico() {
       }]
     }
   });
-
 }
 
 // fUNÇÃO DOS CARDS
@@ -281,3 +285,38 @@ function renderizarCards() {
 
   });
 }
+
+// Excluir catégoria aqui
+btnExcluirCategoria.addEventListener("click", () => {
+
+  if (categoriaAtiva === "Geral") {
+    alert("Não dá pra excluir a categoria Geral!");
+    return;
+  }
+
+  // remove do array
+  categorias = categorias.filter(c => c.nome !== categoriaAtiva);
+
+  // remove a tab da tela
+  const tabs = document.querySelectorAll(".tab-btn");
+
+  tabs.forEach(tab => {
+    if (tab.textContent === categoriaAtiva) {
+      tab.remove();
+    }
+  });
+
+  // volta pra Geral
+  categoriaAtiva = "Geral";
+
+  // ativa visualmente
+  document.querySelectorAll(".tab-btn").forEach(tab => tab.classList.remove("active"));
+  tabGeral.classList.add("active");
+
+  // atualiza tela
+  atualizarTela();
+  renderizarTabela();
+  renderizarGrafico();
+  renderizarCards();
+
+});
