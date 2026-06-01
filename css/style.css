@@ -1,0 +1,367 @@
+:root {
+  /* CORES PRINCIPAIS */
+  --cor-fundo: #dcdcdc;
+  --cor-header: #5c5c5c;
+  --cor-branco: #ffffff;
+  --cor-preto-transparente: rgba(0, 0, 0, 0.5);
+
+  /* BOTÕES / TABS */
+  --cor-tab: #6b6b6b;
+  --cor-tab-ativa: #4f4f4f;
+
+  /* TEXTO */
+  --cor-texto-claro: #9e9e9e;
+  --cor-texto-branco: #ffffff;
+
+  /* BORDAS / ÍCONES */
+  --cor-borda: #5c5c5c;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  background-color: var(--cor-header);
+  height: 70px;
+  color: var(--cor-texto-branco);
+  justify-content: flex-end;
+  display: flex;
+}
+
+/* BOTÃO DE CONFIGURAÇÃO */
+.config-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: var(--cor-texto-branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+/* EFEITO HOVER DO BOTÃO DE CONFIGURAÇÃO */
+.config-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* FOTO DE PERFIL */
+.perfil-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* BOTÃO DE PERFIL */
+.perfil-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TABS */
+.tabs {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;  
+  padding-bottom: 10px; 
+  padding-top: 10px;
+}
+
+/* SCROLLBAR */
+.tabs::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* SCROLLBAR */
+.tabs::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* BOTÕES "TABS" */
+.tab-btn {
+  background-color: var(--cor-tab);
+  border: none;
+  min-width: 120px;
+  max-width: 180px;
+  padding: 8px 20px;
+  color: var(--cor-texto-branco);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 0 0 auto;
+  transition: all 0.25s ease;
+}
+
+/* EFEITO HOVER */
+.tab-btn:hover {
+  background-color: #0d6efd;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+/* EFEITO QUANDO BOTÃO TIVER SELECIONADO */
+.tab-btn.active {
+  background-color: var(--cor-tab-ativa);
+  transform: scale(1.05);
+}
+
+/* EFEITO AO CLICAR */
+.tab-btn:active {
+  transform: scale(0.98);
+}
+
+/* MODAL */
+.modal-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--cor-preto-transparente);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CAIXINHA DO MODAL*/
+.modal-box {
+  background-color: var(--cor-branco);
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: aparecer 0.3s ease;
+}
+
+/* INPUT DO MODAL*/
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  outline: none;
+  transition: 0.2s;
+}
+
+
+/* ALINHAR O NOME NO CENTRO DA CAIXINHA DO MODAL */
+.modal-box h5 {
+  text-align: center;
+}
+
+/* CONTAINER DOS BOTÕES DO MODAL */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* BASE DOS BOTÕES DO MODAL */
+.modal-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* BOTÃO DE CANCELAR VERMELHO */
+.btn-cancelar {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* EFEITO HOVER DO BOTÃO DE CANCELAR */
+.btn-cancelar:hover {
+  background-color: #b02a37;
+}
+
+/* BOTÃO DE CONCLUIR VERDE */
+.btn-concluir {
+  background-color: #28a745;
+  color: white;
+}
+
+/* EFEITO HOVER DO BOTÃO DE CONCLUIR */
+.btn-concluir:hover {
+  background-color: #1e7e34;
+}
+
+
+/* TEXTO CONTEÚDO VAZIO */
+.conteudo-vazio {
+  height: calc(100vh - 140px);
+}
+
+/* BOTÃO + CENTRO DA TELA */
+.box-add {
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--cor-borda);
+  border-radius: 10px;
+  font-size: 40px;
+  color: var(--cor-borda);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+/* EFEITO HOVER DO + NO CETRO DA TELA */
+.box-add:hover {
+  transform: translateY(-8px) scale(1.08);
+  border-color: #007bff;
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ÍCONE DE GIRAR NO QUADRADO DO + */
+.plus-icon {
+  transition: transform 0.3s ease;
+}
+
+/* EFEITO HOVER DO ÍCONE DE GIRAR NO QUADRADO DO + */
+.box-add:hover .plus-icon {
+  transform: rotate(90deg);
+}
+
+/* TEXTO */
+.texto-vazio {
+  color: var(--cor-texto-claro);
+  font-size: 18px;
+}
+
+.grafico-container {
+  max-width: 330px;
+  height: 330px;
+  margin: 0 auto;
+}
+
+#btnExcluirCategoria,
+#btnAddDentro {
+  min-width: 120px;      /* mesmo padrão */
+  padding: 8px 20px;     /* mesmo respiro */
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+/* EFEITO HOVER */
+#btnExcluirCategoria:hover {
+  background-color: #b02a37; /* vermelho mais escuro */
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* A TABELA COMEÇA AQUI DANIMEL*/
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* CABEÇALHO */
+.table thead {
+  background-color: #4f4f4f;
+  color: white;
+}
+
+.table thead th {
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* LINHAS */
+.table tbody tr {
+  transition: 0.2s;
+}
+
+/* EFEITO HOVER */
+.table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* CÉLULAS DA TABELA */
+.table tbody td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+/* ÚLTIMA LINHA DA TABELA SEM A BORDA */
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table td:nth-child(3) {
+  font-weight: bold;
+  color: #dc3535;
+}
+
+/* CONTAINER QUE ESTÃO OS CARDS */
+#cardsPorcentagem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* CARD (Bootstrap + custom) */
+#cardsPorcentagem .card {
+  width: 150px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* EFEITO HOVER */
+#cardsPorcentagem .card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* TÍTULO DO CARD */
+#cardsPorcentagem .card h6 {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* PORCENTAGEM DOS CARDS */
+#cardsPorcentagem .card p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #a72828;
+  margin-top: 5px;
+}
